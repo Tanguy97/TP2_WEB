@@ -43,12 +43,15 @@ const charCounts = function (str) {
  */
 const daysToChristmas = function (date) {
     const noel = new Date(date.getFullYear(),11,25);
-    if(noel-date>=0){
-        return Math.round((noel-date)/(1000*60*60*24))
+    if (noel-date==0){
+        return 0
+    }
+    else if(noel-date>0){
+        return Math.trunc((noel-date)/(1000*60*60*24)+1);
     }
     else{
         const newYear = new Date(date.getFullYear() + 1,0,1);
-        return Math.round((newYear-date)/(1000*60*60*24)+358)
+        return Math.trunc((newYear-date)/(1000*60*60*24)+358);
     }
 }
 
@@ -63,7 +66,9 @@ const daysToChristmas = function (date) {
  * @param {Array} arr - Tableau avec potentiellement des éléments dupliqués
  * @returns {Array} Tableau sans éléments dupliqués
  */
-const distinct = undefined
+const distinct = function (arr) {
+
+}
 
 /**
  * Renvoie un tableau qui contient les clés partagées entre deux objets Javascript.
