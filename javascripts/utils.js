@@ -34,7 +34,7 @@ const charCounts = function (str) {
     const arr = str.split("");
     const obj = {};
     arr.map(function(value){
-        const regExp = new RegExp(value)
+        const regExp = new RegExp(value);
         const alphabet = "abcdefghijklmnopqrstuvwxyz";
         if (regExp.test(alphabet)){
             if (value in obj){
@@ -59,7 +59,7 @@ const charCounts = function (str) {
 const daysToChristmas = function (date) {
     const noel = new Date(date.getFullYear(),11,25);
     if (noel-date==0){
-        return 0
+        return 0;
     }
     else if(noel-date>0){
         return Math.trunc((noel-date)/(1000*60*60*24)+1);
@@ -108,7 +108,7 @@ const commonKeys = function(obj1,obj2){
     const share_keys = [];
     arr.map(function(value){
         if(value in obj2 && share_keys.find(x=>x==value)==undefined){
-            share_keys.push(value)
+            share_keys.push(value);
         }
     })
     return share_keys;
@@ -124,7 +124,36 @@ const commonKeys = function(obj1,obj2){
  * @param {Boolean} asc - True si on trie en ordre croissant. False pour décroissant
  * @returns {Array} Tableau trié
  */
-const sortByAuthorAndTitle = undefined
+const sortByAuthorAndTitle = function(arr,asc){
+    if(asc==undefined){
+        asc=true;
+    }
+    const arr_sorted=arr.sort(function(x,y){
+        const xAuthor = x.author.toLowerCase();
+        const yAuthor = y.author.toLowerCase();
+        const xTitle = x.title.toLowerCase();
+        const yTitle = y.title.toLowerCase();
+        if(xAuthor<yAuthor){
+            return -1;
+        }
+        if(xAuthor>yAuthor){
+            return 1;
+        }
+        if(xTitle<yTitle){
+            return -1;
+        }
+        if(xTitle>yTitle){
+            return 1;
+        }
+        return O;
+    });
+    if(asc){
+        return arr_sorted;
+    }
+    else{
+        return arr_sorted.reverse();
+    }
+}
 
 /**
  * Convertit une fonction de trois paramètre non-currifiée vers une fonction currifiée de 3 paramètres.
