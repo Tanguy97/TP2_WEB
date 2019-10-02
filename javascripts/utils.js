@@ -82,13 +82,13 @@ const daysToChristmas = function (date) {
  * @returns {Array} Tableau sans éléments dupliqués
  */
 const distinct = function (arr) {
-    const obj = {};
+    const new_arr = [];
     arr.map(function(value,index,array){
-        if (!(value in obj)){
-            obj[value]=true;
+        if (new_arr.find(x => x==value)==undefined){
+            new_arr.push(value);
         }
     });
-    return Object.keys(obj);
+    return new_arr;
 }
 
 /**
@@ -104,14 +104,14 @@ const distinct = function (arr) {
  * @returns {Array} Tableau qui contient les cléfs partagées entre deux objets
  */
 const commonKeys = function(obj1,obj2){
-    const tab = Object.keys(obj1);
-    const res = {};
-    tab.map(function(value){
-        if(value in obj2){
-            res[value]=true;
+    const arr = Object.keys(obj1);
+    const share_keys = [];
+    arr.map(function(value){
+        if(value in obj2 && share_keys.find(x=>x==value)==undefined){
+            share_keys.push(value)
         }
     })
-    return Object.keys(res);
+    return share_keys;
 }
 
 /**
