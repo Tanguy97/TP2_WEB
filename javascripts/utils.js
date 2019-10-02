@@ -103,7 +103,16 @@ const distinct = function (arr) {
  * @param {Object} obj2 - Deuxième objet
  * @returns {Array} Tableau qui contient les cléfs partagées entre deux objets
  */
-const commonKeys = undefined
+const commonKeys = function(obj1,obj2){
+    const tab = Object.keys(obj1);
+    const res = {};
+    tab.map(function(value){
+        if(value in obj2){
+            res[value]=true;
+        }
+    })
+    return Object.keys(res);
+}
 
 /**
  * Renvoie un tableau trié selon le champ 'author' d'un objet. Si deux objets
