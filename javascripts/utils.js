@@ -30,7 +30,22 @@ const genererCompteur = function(x) {
  * @returns {Object<string, number>}
  */
 const charCounts = function (str) {
-
+    str = str.toLowerCase();
+    const arr = str.split("");
+    const obj = {};
+    arr.map(function(value){
+        const regExp = new RegExp(value)
+        const alphabet = "abcdefghijklmnopqrstuvwxyz";
+        if (regExp.test(alphabet)){
+            if (value in obj){
+                obj[value]+=1;
+            }
+            else{
+                obj[value]= 1;
+            }
+        }
+    })
+    return obj;
 }
 
 /**
@@ -67,7 +82,13 @@ const daysToChristmas = function (date) {
  * @returns {Array} Tableau sans éléments dupliqués
  */
 const distinct = function (arr) {
-
+    const obj = {};
+    arr.map(function(value,index,array){
+        if (!(value in obj)){
+            obj[value]=true;
+        }
+    });
+    return Object.keys(obj);
 }
 
 /**
