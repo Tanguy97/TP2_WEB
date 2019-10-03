@@ -74,7 +74,7 @@ const daysToChristmas = function (date) {
  * Renvoie un tableau sans éléments dupliqués.
  *
  * Notions: Manipulation de tableaux (reduce)
- *
+ *    console.log(predicate);
  * @example
  * distinct([1, 2, 2, 3, 1]) // Renvoie [1, 2, 3]
  *
@@ -99,7 +99,7 @@ const distinct = function (arr) {
  * @example
  * commonKeys({ x: 1, y: 2}, { x: 2, z: 4 }) // Renvoie [x]
  *
- * @param {Object} obj1 - Premier objet
+ * @param {Object} obj1 - Premi    console.log(predicate);er objet
  * @param {Object} obj2 - Deuxième objet
  * @returns {Array} Tableau qui contient les cléfs partagées entre deux objets
  */
@@ -171,7 +171,7 @@ const sortByAuthorAndTitle = function(arr,asc){
  * sumCurriedOne = sumCurried(1) // Retourne une fonction de 2 paramètres qui fait la somme entre 1 + y + z
  * sumCurriedThree = sumCurriedOne(2) // Retourne une fonction de 1 paramètre qui fait la somme entre 1 + 2 + z
  * sumCurriedThree(3) // Retourne le résultat de 1 + 2 + 3, donc 6.
- * 
+ *
  * @param {Function} fun - Fonction à currifier
  * @param {any} x - 1re paramètre
  * @param {any} y - 2e paramètre
@@ -180,7 +180,7 @@ const sortByAuthorAndTitle = function(arr,asc){
  */
 
 
-const curry3=fun=>x=>y=>z=>fun(x,y,z) 
+const curry3=fun=>x=>y=>z=>fun(x,y,z)
 
 /**
  * Applique une fonction de rappel sur chaque élément d'un tableau et retourne
@@ -219,10 +219,13 @@ function map(arr, callback) {
  * @returns {Array}
  */
 function find(arr, predicate) {
-  if(arr.find(predicate)==null){
-    return null
-  }
-  else return arr.find(predicate)
+    if(arr.length==0){
+        return null;
+    }
+    if(predicate(arr[0])){
+        return arr[0];
+    }
+    return find(arr.slice(1),predicate);
 }
 
 /**
@@ -277,7 +280,7 @@ class Employee {
   constructor(id,name,salary){
     this.id=id
     this.salary=salary
-    this.name=name    
+    this.name=name
   }
 
   toString(Employee) {
