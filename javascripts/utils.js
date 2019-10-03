@@ -4,7 +4,7 @@
  * cette valeur et la renvoie.
  *
  * @example
- * genererCompteur(1) // Renvoie une fonction
+ * const Compteur=genererCompteur(1) // Renvoie une fonction
  * Compteur() // Renvoie 2
  * Compteur() // Renvoie 3
  */
@@ -29,12 +29,23 @@ const genererCompteur = function(x) {
  * @param {string} str - Chaîne de caractère
  * @returns {Object<string, number>}
  */
-
-const charCounts = str =>{
-  str.reduce((occurance, lettre) => {
-    occurance[lettre] = (occurance[lettre] || 0) + 1 ;
-    return tally;
-  } , {})
+const charCounts = function (str) {
+    str = str.toLowerCase();
+    const arr = str.split("");
+    const obj = {};
+    arr.map(function(value){
+        const regExp = new RegExp(value);
+        const alphabet = "abcdefghijklmnopqrstuvwxyz";
+        if (regExp.test(alphabet)){
+            if (value in obj){
+                obj[value]+=1;
+            }
+            else{
+                obj[value]= 1;
+            }
+        }
+    })
+    return obj;
 }
 
 /**
@@ -45,7 +56,19 @@ const charCounts = str =>{
  * @param {Date} date - Objet de Date
  * @returns {number} Nombre de jours jusqu'à Noël prochain.
  */
-const daysToChristmas = undefined
+const daysToChristmas = function (date) {
+    const noel = new Date(date.getFullYear(),11,25);
+    if (noel-date==0){
+        return 0;
+    }
+    else if(noel-date>0){
+        return Math.trunc((noel-date)/(1000*60*60*24)+1);
+    }
+    else{
+        const newYear = new Date(date.getFullYear() + 1,0,1);
+        return Math.trunc((newYear-date)/(1000*60*60*24)+358);
+    }
+}
 
 /**
  * Renvoie un tableau sans éléments dupliqués.
@@ -58,18 +81,15 @@ const daysToChristmas = undefined
  * @param {Array} arr - Tableau avec potentiellement des éléments dupliqués
  * @returns {Array} Tableau sans éléments dupliqués
  */
-const unique = (value, index, self) => {
-  return self.indexOf(value) === index
+const distinct = function (arr) {
+    const new_arr = [];
+    arr.map(function(value,index,array){
+        if (new_arr.find(x => x==value)==undefined){
+            new_arr.push(value);
+        }
+    });
+    return new_arr;
 }
-
-const distinct = function(arr) {
-  arr.reduce(acc,x)=>{
-    acc.push(x);
-    return acc;
-  } , [])
-}
-  
-  
 
 /**
  * Renvoie un tableau qui contient les clés partagées entre deux objets Javascript.
@@ -83,7 +103,16 @@ const distinct = function(arr) {
  * @param {Object} obj2 - Deuxième objet
  * @returns {Array} Tableau qui contient les cléfs partagées entre deux objets
  */
-const commonKeys = undefined
+const commonKeys = function(obj1,obj2){
+    const arr = Object.keys(obj1);
+    const share_keys = [];
+    arr.map(function(value){
+        if(value in obj2 && share_keys.find(x=>x==value)==undefined){
+            share_keys.push(value);
+        }
+    })
+    return share_keys;
+}
 
 /**
  * Renvoie un tableau trié selon le champ 'author' d'un objet. Si deux objets
@@ -95,7 +124,36 @@ const commonKeys = undefined
  * @param {Boolean} asc - True si on trie en ordre croissant. False pour décroissant
  * @returns {Array} Tableau trié
  */
-const sortByAuthorAndTitle = undefined
+const sortByAuthorAndTitle = function(arr,asc){
+    if(asc==undefined){
+        asc=true;
+    }
+    const arr_sorted=arr.sort(function(x,y){
+        const xAuthor = x.author.toLowerCase();
+        const yAuthor = y.author.toLowerCase();
+        const xTitle = x.title.toLowerCase();
+        const yTitle = y.title.toLowerCase();
+        if(xAuthor<yAuthor){
+            return -1;
+        }
+        if(xAuthor>yAuthor){
+            return 1;
+        }
+        if(xTitle<yTitle){
+            return -1;
+        }
+        if(xTitle>yTitle){
+            return 1;
+        }
+        return O;
+    });
+    if(asc){
+        return arr_sorted;
+    }
+    else{
+        return arr_sorted.reverse();
+    }
+}
 
 /**
  * Convertit une fonction de trois paramètre non-currifiée vers une fonction currifiée de 3 paramètres.
@@ -105,16 +163,24 @@ const sortByAuthorAndTitle = undefined
  * @example
  * const sum = (x, y, z) => x + y + z
  * sum(10, 5, 3) // Renvoie 18
- * const sumCurried = curry(sum)
+ *
  * sumCurried(10)(5)(3) // Renvoie 18
  *
+ * const sumCurried = curry3(sum) // Prend la fonction sum non currifié en paramètre et la convertit vers une version currifiée.
+ * //Ensuite on peut appeler partiellement la fonction sumCurried.
+ * sumCurriedOne = sumCurried(1) // Retourne une fonction de 2 paramètres qui fait la somme entre 1 + y + z
+ * sumCurriedThree = sumCurriedOne(2) // Retourne une fonction de 1 paramètre qui fait la somme entre 1 + 2 + z
+ * sumCurriedThree(3) // Retourne le résultat de 1 + 2 + 3, donc 6.
+ * 
  * @param {Function} fun - Fonction à currifier
  * @param {any} x - 1re paramètre
  * @param {any} y - 2e paramètre
  * @param {any} z - 3e paramètre
  * @returns {Function} Fonction currifiée
  */
-const curry3 = undefined
+
+
+const curry3=fun=>x=>y=>z=>fun(x,y,z) 
 
 /**
  * Applique une fonction de rappel sur chaque élément d'un tableau et retourne
@@ -133,7 +199,7 @@ const curry3 = undefined
  * @returns {Array}
  */
 function map(arr, callback) {
-  return undefined
+  return arr.map(callback)
 }
 
 /**
@@ -153,7 +219,10 @@ function map(arr, callback) {
  * @returns {Array}
  */
 function find(arr, predicate) {
-  return undefined
+  if(arr.find(predicate)==null){
+    return null
+  }
+  else return arr.find(predicate)
 }
 
 /**
@@ -187,8 +256,9 @@ function find(arr, predicate) {
  * élément du tableau en paramètre.
  * @returns {S} Accumulateur
  */
+
 function fold(arr, init, op) {
-  return undefined
+    return arr.reduce(op,init)
 }
 
 /**
@@ -204,8 +274,16 @@ function fold(arr, init, op) {
  * e.toString() // Renvoie 'Employee name=Konstantinos,salary=50000
  */
 class Employee {
-}
+  constructor(id,name,salary){
+    this.id=id
+    this.salary=salary
+    this.name=name    
+  }
 
+  toString(Employee) {
+    return "Employee name="+this.name +",salary="+this.salary
+  }
+}
 /**
  * Classe Chercheur représentée par 4 attributs: id, name, salary, bonus.
  * Elle hérite de Employee. L'attribut 'bonus' ne peut être accéder ni
@@ -217,7 +295,15 @@ class Employee {
  * const e = new Chercheur(1, 'Konstantinos', 50000, 10)
  * e.toString() // Renvoie 'Employee name=Konstantinos,salary=50000,bonus=10
  */
-class Chercheur {
+class Chercheur extends Employee{
+  constructor(id,name,salary,bonus){
+    super(id,name,salary)
+    this.bonus=bonus
+  }
+
+  toString(Employee) {
+    return "Employee name="+this.name +",salary="+this.salary+",bonus="+this.bonus
+  }
 }
 
 export {
