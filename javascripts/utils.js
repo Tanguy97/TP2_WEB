@@ -199,7 +199,12 @@ const curry3=fun=>x=>y=>z=>fun(x,y,z)
  * @returns {Array}
  */
 function map(arr, callback) {
-  return arr.map(callback)
+  if (arr.length!=0){
+    return [callback(arr[0])].concat(map(arr.slice(1),callback))
+  }
+  else {
+    return []
+  }
 }
 
 /**
@@ -274,16 +279,31 @@ function fold(arr, init, op) {
  * e.toString() // Renvoie 'Employee name=Konstantinos,salary=50000
  */
 class Employee {
+  
   constructor(id,name,salary){
-    this.id=id
-    this.salary=salary
-    this.name=name    
+    this._id=id
+    this._salary=salary
+    this._name=name    
   }
 
   toString(Employee) {
-    return "Employee name="+this.name +",salary="+this.salary
+    return "Employee name="+this._name +",salary="+this._salary
+  }
+
+  get id(){
+    return this._id
+  }
+  get salary(){
+    return this._salary
+  }
+  get name(){
+    return this._name
+  }
+  set name(name){
+    this._name=name
   }
 }
+
 /**
  * Classe Chercheur représentée par 4 attributs: id, name, salary, bonus.
  * Elle hérite de Employee. L'attribut 'bonus' ne peut être accéder ni
@@ -298,11 +318,18 @@ class Employee {
 class Chercheur extends Employee{
   constructor(id,name,salary,bonus){
     super(id,name,salary)
-    this.bonus=bonus
+    this._bonus=bonus
+  }
+
+  get bonus(){
+    return this._bonus
+  }
+  set bonus(bonus){
+    this._bonus=bonus
   }
 
   toString(Employee) {
-    return "Employee name="+this.name +",salary="+this.salary+",bonus="+this.bonus
+    return "Employee name="+this._name +",salary="+this._salary+",bonus="+this._bonus
   }
 }
 
