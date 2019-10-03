@@ -261,7 +261,10 @@ function find(arr, predicate) {
  */
 
 function fold(arr, init, op) {
-    return arr.reduce(op,init)
+    if(arr.length>0){
+        return  fold(arr.slice(1),op(init,arr[0]), op);
+    }
+    return init;
 }
 
 /**
