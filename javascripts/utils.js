@@ -327,13 +327,6 @@ class Chercheur extends Employee{
     this._bonus=bonus
   }
 
-  get bonus(){
-    return this._bonus
-  }
-  set bonus(bonus){
-    this._bonus=bonus
-  }
-
   toString(Employee) {
     return "Employee name="+this._name +",salary="+this._salary+",bonus="+this._bonus
   }
