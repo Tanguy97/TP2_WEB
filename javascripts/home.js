@@ -29,6 +29,8 @@ function insertJumbotron(texte) {
     })
 }
 
+//Selection dans le bandeau de navigation
 header()
 
+//Requête ajax pour obtenir la description de la page
 $.get("http://localhost:3000/api/description","",insertJumbotron,'JSON')
