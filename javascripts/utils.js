@@ -292,7 +292,7 @@ class Employee {
     this._name=name    
   }
 
-  toString(Employee) {
+  toString() {
     return "Employee name="+this._name +",salary="+this._salary
   }
 
