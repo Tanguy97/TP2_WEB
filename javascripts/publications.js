@@ -7,8 +7,8 @@ $(".del-icon").click(deletePublication)
 function modifyUrl(){
     const url=new URL(document.location.href)
     const search_params=new URLSearchParams(url.search)
-    const parametre=search_params.get('sort_by')
-    const maValeur = (parametre == null) ? "date" : parametre
+    // const parametre=search_params.get('sort_by')
+    // const maValeur = (parametre == null) ? "date" : parametre
     search_params.set('sort_by',$(this).val())
     url.search=search_params
     document.location.href=url
@@ -45,7 +45,6 @@ function addAuthor(){
 }
 
 function removeAuthor(){
-    console.log("hello")
     $(this).parent().parent().remove()
 }
 
@@ -54,4 +53,3 @@ $(".del-icon").click(deletePublication)
 
 //Ajout d'un auteur
 $(".add-author > i").click(addAuthor)
-
