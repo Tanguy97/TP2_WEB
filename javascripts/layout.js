@@ -9,7 +9,7 @@ function header(){
         $('#team-link').addClass('link');
         $('#team-link').addClass('active');
     }
-    else if((new RegExp("/projects")).test(url.href)){
+    else if((new RegExp("/project")).test(url.href)){
         $('#projects-link').addClass('link');
         $('#projects-link').addClass('active');
     }
