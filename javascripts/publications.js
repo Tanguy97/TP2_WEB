@@ -30,31 +30,37 @@ function constructModifyUrl(param){
     document.location.href=url
     } 
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> a441f9c61f7f07106394b6c90cfd35d9c731f759
 
 function modifyUrlPage(){
-    console.log("Hello")
     const url=new URL(document.location.href)
     const search_params=new URLSearchParams(url.search)
-    search_params.set('page',$(this).dataset.pagenumber)
+    search_params.set('page',$(this).attr('data-pagenumber'))
     url.search=search_params
     document.location.href=url   
 }
 
-//boo=true(page++) false page--
+//boo=true(next page) false previous page
 function constructModifyUrlPage(boo){ 
     return function modifyUrl(){
     const url=new URL(document.location.href)
     const search_params=new URLSearchParams(url.search)
-    if(boo=true){
-        const parametre=search_params.get('sort_by')
+    let page=search_params.get('page')
+    if(page!=indefinded){
+        if(boo){
+            console.log(page)
+            page+=1
+            console.log(page)
+        }
+        else{
+            console.log(page)
+            page-=1
+            console.log(page)
+        }
+        search_params.set('page',page)
+        url.search=search_params
+        document.location.href=url   
     }
-    search_params.set('page',$(this).val())
-    url.search=search_params
-    document.location.href=url   
+    
     } 
 }
 
@@ -62,6 +68,8 @@ actualiserPage();
 $("#fieldFilterSection").change(constructModifyUrl('sort_by',true))
 $("#filterAscValueSection").change(constructModifyUrl('order_by',true))
 $(".pagination .pagination-link").click(modifyUrlPage)
+$(".pagination .pagination-link-previous").click(constructModifyUrlPage(false))
+$(".pagination .pagination-link-next").click(constructModifyUrlPage(true))
 $("#elementsPerPageSection").change(constructModifyUrl('limit',true))
 
 function addAuthor(){
