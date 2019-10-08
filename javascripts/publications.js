@@ -4,15 +4,18 @@ function deletePublication(){
 
 $(".del-icon").click(deletePublication)
 
-function modifyUrl(){
+function constructModifyUrl(param){
+    return function modifyUrl(){
     const url=new URL(document.location.href)
     const search_params=new URLSearchParams(url.search)
-    const parametre=search_params.get('sort_by')
-    const maValeur = (parametre == null) ? "date" : parametre
-    search_params.set('sort_by',$(this).val())
+    //const parametre=search_params.get('sort_by')
+    //const maValeur = (parametre == null) ? "date" : parametre
+    search_params.set(param,$(this).val())
     url.search=search_params
-    document.location.href=url
+    document.location.href=url   
+    } 
 }
+  
 
 function actualiserPage(){
     const url=new URL(document.location.href)
@@ -30,8 +33,8 @@ function actualiserPage(){
 }
 
 actualiserPage();
-$("#fieldFilterSection").change(modifyUrl)
-
+$("#fieldFilterSection").change(constructModifyUrl('sort_by'))
+$("#filterAscValueSection").change(constructModifyUrl('order_by'))
 
 function addAuthor(){
     $(this).parent().before("<div class='new-authors'></div>")
