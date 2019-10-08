@@ -27,9 +27,13 @@ function constructModifyUrl(param){
     //const maValeur = (parametre == null) ? "date" : parametre
     search_params.set(param,$(this).val())
     url.search=search_params
-    document.location.href=url   
+    document.location.href=url
     } 
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> a441f9c61f7f07106394b6c90cfd35d9c731f759
 
 function modifyUrlPage(){
     console.log("Hello")
@@ -71,7 +75,6 @@ function addAuthor(){
 }
 
 function removeAuthor(){
-    console.log("hello")
     $(this).parent().parent().remove()
 }
 
@@ -80,4 +83,3 @@ $(".del-icon").click(deletePublication)
 
 //Ajout d'un auteur
 $(".add-author > i").click(addAuthor)
-

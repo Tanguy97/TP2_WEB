@@ -4,16 +4,16 @@ function header(){
     if (url.href==url.origin+"/"){
         $('#home-link').addClass('link');
         $('#home-link').addClass('active');
-   }
-    else if(url==url.origin+"/team"){
+    }
+    else if((new RegExp("/team")).test(url.href)){
         $('#team-link').addClass('link');
         $('#team-link').addClass('active');
     }
-    else if(url==url.origin+"/projects"){
+    else if((new RegExp("/projects")).test(url.href)){
         $('#projects-link').addClass('link');
         $('#projects-link').addClass('active');
     }
-    else if(url==url.origin+"/publications"){
+    else if((new RegExp("/publications")).test(url.href)){
         $('#publications-link').addClass('link');
         $('#publications-link').addClass('active');
     }
