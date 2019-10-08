@@ -4,19 +4,6 @@ function deletePublication(){
 
 $(".del-icon").click(deletePublication)
 
-function constructModifyUrl(param){
-    return function modifyUrl(){
-    const url=new URL(document.location.href)
-    const search_params=new URLSearchParams(url.search)
-    //const parametre=search_params.get('sort_by')
-    //const maValeur = (parametre == null) ? "date" : parametre
-    search_params.set(param,$(this).val())
-    url.search=search_params
-    document.location.href=url   
-    } 
-}
-  
-
 function actualiserPage(){
     const url=new URL(document.location.href)
     const search_params=new URLSearchParams(url.search)
@@ -32,9 +19,46 @@ function actualiserPage(){
     else $("#filterAscValueSection").val('desc')
 }
 
+function constructModifyUrl(param){ 
+    return function modifyUrl(){
+    const url=new URL(document.location.href)
+    const search_params=new URLSearchParams(url.search)
+    //const parametre=search_params.get('sort_by')
+    //const maValeur = (parametre == null) ? "date" : parametre
+    search_params.set(param,$(this).val())
+    url.search=search_params
+    document.location.href=url   
+    } 
+}
+
+function modifyUrlPage(){
+    console.log("Hello")
+    const url=new URL(document.location.href)
+    const search_params=new URLSearchParams(url.search)
+    search_params.set('page',$(this).dataset.pagenumber)
+    url.search=search_params
+    document.location.href=url   
+}
+
+//boo=true(page++) false page--
+function constructModifyUrlPage(boo){ 
+    return function modifyUrl(){
+    const url=new URL(document.location.href)
+    const search_params=new URLSearchParams(url.search)
+    if(boo=true){
+        const parametre=search_params.get('sort_by')
+    }
+    search_params.set('page',$(this).val())
+    url.search=search_params
+    document.location.href=url   
+    } 
+}
+
 actualiserPage();
-$("#fieldFilterSection").change(constructModifyUrl('sort_by'))
-$("#filterAscValueSection").change(constructModifyUrl('order_by'))
+$("#fieldFilterSection").change(constructModifyUrl('sort_by',true))
+$("#filterAscValueSection").change(constructModifyUrl('order_by',true))
+$(".pagination .pagination-link").click(modifyUrlPage)
+$("#elementsPerPageSection").change(constructModifyUrl('limit',true))
 
 function addAuthor(){
     $(this).parent().before("<div class='new-authors'></div>")
@@ -44,7 +68,6 @@ function addAuthor(){
     $("form .new-authors .remove-author:last").append("<i class='fa fa-minus fa-3x'></i>")
     //Attache de l'évènement supprimer un auteur
     $(".remove-author:last > i").click(removeAuthor)
-
 }
 
 function removeAuthor(){
