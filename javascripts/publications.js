@@ -61,10 +61,10 @@ function modifyUrlPage(){
 }
 
 actualiserPage();
-$("#fieldFilterSection").change(constructModifyUrl('sort_by',true))
-$("#filterAscValueSection").change(constructModifyUrl('order_by',true))
+$("#fieldFilterSection").change(constructModifyUrl('sort_by'))
+$("#filterAscValueSection").change(constructModifyUrl('order_by'))
 $(".pagination .pagination-link").click(modifyUrlPage)
-$("#elementsPerPageSection").change(constructModifyUrl('limit',true))
+$("#elementsPerPageSection").change(modifyUrlLimit)
 
 function addAuthor(){
     $(this).parent().before("<div class='new-authors'></div>")
