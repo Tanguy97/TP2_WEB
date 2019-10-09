@@ -26,6 +26,9 @@ function actualiserPage(){
     if(limit!=null){
         $("#elementsPerPageSection").val(limit)
     }
+    else{
+        $("#elementsPerPageSection").val('10')
+    }
 }
 
 function constructModifyUrl(param){
