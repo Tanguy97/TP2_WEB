@@ -23,7 +23,7 @@ function actualiserPage(){
     }
     else $("#filterAscValueSection").val('desc')
     $(".pagination [data-pagenumber="+page+"]").addClass('active')
-    if(limit!=null){
+    if(limit!=undefined){
         $("#elementsPerPageSection").val(limit)
     }
 }
@@ -44,7 +44,7 @@ function modifyUrlLimit(){
     search_params.set('limit',$(this).val())
     search_params.set('page','1')
     url.search=search_params
-    document.location.href=url   
+    document.location.href=url
 }
 
 function modifyUrlPage(){
