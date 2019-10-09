@@ -9,7 +9,10 @@ function actualiserPage(){
     const search_params=new URLSearchParams(url.search)
     const sortBy=search_params.get('sort_by')
     const orderBy=search_params.get('order_by')
-    const page=search_params.get('page')
+    let page=search_params.get('page')
+    if (page==undefined){
+        page="1"
+    }
     if(sortBy!=null){
         $("#fieldFilterSection").val(sortBy)
     }
