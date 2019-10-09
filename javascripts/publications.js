@@ -9,6 +9,7 @@ function actualiserPage(){
     const search_params=new URLSearchParams(url.search)
     const sortBy=search_params.get('sort_by')
     const orderBy=search_params.get('order_by')
+    const page=search_params.get('page')
     if(sortBy!=null){
         $("#fieldFilterSection").val(sortBy)
     }
@@ -17,6 +18,7 @@ function actualiserPage(){
         $("#filterAscValueSection").val(orderBy)
     }
     else $("#filterAscValueSection").val('desc')
+    $(".pagination [data-pagenumber="+page+"]").addClass('active')
 }
 
 function constructModifyUrl(param){
