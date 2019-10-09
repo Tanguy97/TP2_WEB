@@ -9,6 +9,7 @@ function actualiserPage(){
     const search_params=new URLSearchParams(url.search)
     const sortBy=search_params.get('sort_by')
     const orderBy=search_params.get('order_by')
+    const limit=search_params.get('limit')
     let page=search_params.get('page')
     if (page==undefined){
         page="1"
@@ -22,6 +23,9 @@ function actualiserPage(){
     }
     else $("#filterAscValueSection").val('desc')
     $(".pagination [data-pagenumber="+page+"]").addClass('active')
+    if(limit!=null){
+        $("#elementsPerPageSection").val(limit)
+    }
 }
 
 function constructModifyUrl(param){
